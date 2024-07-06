@@ -26,6 +26,9 @@ public class MosqueController {
 
     @PostMapping
     public void add(@RequestBody Mosque mosque) {
+        if (mosqueService.findByKey(mosque.getUid()) != null) {
+            throw new RuntimeException("item found");
+        }
         mosqueService.addMosque(mosque);
     }
 
