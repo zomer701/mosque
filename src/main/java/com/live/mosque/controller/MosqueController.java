@@ -34,11 +34,17 @@ public class MosqueController {
 
     @PatchMapping
     public Mosque patch(@RequestBody Mosque mosque) {
+        if (mosqueService.findByKey(mosque.getUid()) != null) {
+            throw new RuntimeException("item found");
+        }
         return mosqueService.patchUpdate(mosque);
     }
 
     @PutMapping
     public Mosque put(@RequestBody Mosque mosque) {
+        if (mosqueService.findByKey(mosque.getUid()) != null) {
+            throw new RuntimeException("item found");
+        }
         return mosqueService.putUpdate(mosque);
     }
 
