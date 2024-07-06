@@ -1,0 +1,5 @@
+spring:
+  config:
+    import: aws-secretsmanager:/secret/mosque
+server:
+  port: 8085
