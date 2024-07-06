@@ -120,7 +120,7 @@ public class MosqueService {
 
             return mosque;
         } catch (InterruptedException | ExecutionException e) {
-            throw new RuntimeException(e);
+            return null;
         }
     }
 

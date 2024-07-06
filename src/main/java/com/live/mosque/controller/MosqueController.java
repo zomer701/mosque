@@ -3,6 +3,8 @@ package com.live.mosque.controller;
 import com.live.mosque.data.Mosque;
 import com.live.mosque.service.MosqueService;
 import jakarta.annotation.Resource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.List;
 @RequestMapping("mosque")
 public class MosqueController {
 
+    private static final Logger log = LoggerFactory.getLogger(MosqueController.class);
     @Resource
     private MosqueService mosqueService;
 
@@ -26,24 +29,37 @@ public class MosqueController {
 
     @PostMapping
     public void add(@RequestBody Mosque mosque) {
-        if (mosqueService.findByKey(mosque.getUid()) != null) {
-            throw new RuntimeException("item found");
+        try {
+            if (mosqueService.findByKey(mosque.getUid()) != null) {
+                throw new RuntimeException("item found");
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage());
         }
+
         mosqueService.addMosque(mosque);
     }
 
     @PatchMapping
     public Mosque patch(@RequestBody Mosque mosque) {
-        if (mosqueService.findByKey(mosque.getUid()) != null) {
-            throw new RuntimeException("item found");
+        try {
+            if (mosqueService.findByKey(mosque.getUid()) != null) {
+                throw new RuntimeException("item found");
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage());
         }
         return mosqueService.patchUpdate(mosque);
     }
 
     @PutMapping
     public Mosque put(@RequestBody Mosque mosque) {
-        if (mosqueService.findByKey(mosque.getUid()) != null) {
-            throw new RuntimeException("item found");
+        try {
+            if (mosqueService.findByKey(mosque.getUid()) != null) {
+                throw new RuntimeException("item found");
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage());
         }
         return mosqueService.putUpdate(mosque);
     }
